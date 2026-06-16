@@ -1,0 +1,18 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Editors
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+
+# Stray test output from example runs
+Downloads/
+manifest.json
+*.pdf
+*.docx
+*.pptx
