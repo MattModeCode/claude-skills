@@ -1,9 +1,8 @@
-# gdrive-bulk-download
+# claude-skills
 
-> Claude Code skills, published. Point Claude at a pile of Google Drive
-> links and it downloads them all — even on restricted or managed Google
-> Workspace accounts that can't install a Drive connector or browser
-> extension.
+> Claude Code skills, published. Starts with one that bulk-downloads a pile
+> of Google Drive links — even on restricted or managed Google Workspace
+> accounts that can't install a Drive connector or browser extension.
 
 This repo is where I publish my [Claude Code](https://claude.com/claude-code)
 skills. It starts with one — `gdrive-bulk-download` — and is structured so
@@ -50,14 +49,14 @@ Clone this repo and copy (or symlink) the skill you want into your Claude Code
 skills directory:
 
 ```bash
-git clone https://github.com/MattModeCode/gdrive-bulk-download.git
-cp -r gdrive-bulk-download/skills/gdrive-bulk-download ~/.claude/skills/
+git clone https://github.com/MattModeCode/claude-skills.git
+cp -r claude-skills/skills/gdrive-bulk-download ~/.claude/skills/
 ```
 
 Or symlink it so you can `git pull` updates in place:
 
 ```bash
-ln -s "$(pwd)/gdrive-bulk-download/skills/gdrive-bulk-download" \
+ln -s "$(pwd)/claude-skills/skills/gdrive-bulk-download" \
   ~/.claude/skills/gdrive-bulk-download
 ```
 
