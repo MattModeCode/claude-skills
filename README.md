@@ -1,6 +1,19 @@
 # gdrive-bulk-download
 
-> A [Claude Code](https://claude.com/claude-code) skill to bulk-download Google Docs, Google Slides decks, and Drive-hosted PDF / DOCX / PPTX files from a list of links — even on restricted or managed Google Workspace accounts.
+> Claude Code skills, published. Point Claude at a pile of Google Drive
+> links and it downloads them all — even on restricted or managed Google
+> Workspace accounts that can't install a Drive connector or browser
+> extension.
+
+This repo is where I publish my [Claude Code](https://claude.com/claude-code)
+skills. It starts with one — `gdrive-bulk-download` — and is structured so
+more can be dropped in alongside it over time.
+
+## Skills Library
+
+| Skill | Description |
+|---|---|
+| [`gdrive-bulk-download`](./skills/gdrive-bulk-download) | Bulk-download Google Docs, Slides, and Drive-hosted PDF/DOCX/PPTX files from a list of links, including on restricted/managed Workspace accounts. |
 
 ## What it does
 
@@ -24,17 +37,17 @@ a Drive MCP, or browser extensions.
 ## Requirements
 
 - **[Claude Code](https://claude.com/claude-code)**
-- **[gstack](https://github.com/getgrit/gstack)** — this skill is **not
-  functional without it**. It uses gstack's headless `browse` binary (referenced
-  as `$B`, expected at `~/.claude/skills/gstack/browse/dist/browse`) for all
-  navigation and downloads.
+- **[gstack](https://github.com/getgrit/gstack)** — `gdrive-bulk-download` is
+  **not functional without it**. It uses gstack's headless `browse` binary
+  (referenced as `$B`, expected at `~/.claude/skills/gstack/browse/dist/browse`)
+  for all navigation and downloads.
 - A Google account with access to the files, logged in within the browse session
   (see [Authentication](#authentication)).
 
 ## Installation
 
-Clone this repo and copy (or symlink) the skill into your Claude Code skills
-directory:
+Clone this repo and copy (or symlink) the skill you want into your Claude Code
+skills directory:
 
 ```bash
 git clone https://github.com/MattModeCode/gdrive-bulk-download.git
@@ -48,8 +61,7 @@ ln -s "$(pwd)/gdrive-bulk-download/skills/gdrive-bulk-download" \
   ~/.claude/skills/gdrive-bulk-download
 ```
 
-Restart Claude Code (or start a new session) and the `gdrive-bulk-download`
-skill will be available.
+Restart Claude Code (or start a new session) and the skill will be available.
 
 ## Usage
 
@@ -93,10 +105,12 @@ not authenticated:
 
 - It will use gstack's `/connect-chrome` + a manual `handoff` so you can complete
   login/MFA yourself, then resume.
-- **Cookie import (`/setup-browser-cookies`) is unreliable for restricted/managed
-  accounts.** Google auth cookies often get scoped to a country-TLD domain (e.g.
-  `.google.ca`) that doesn't carry over to `drive.google.com` / `docs.google.com`.
-  Prefer `/connect-chrome` + manual login for those accounts.
+
+> [!WARNING]
+> Cookie import (`/setup-browser-cookies`) is unreliable for restricted/managed
+> accounts. Google auth cookies often get scoped to a country-TLD domain (e.g.
+> `.google.ca`) that doesn't carry over to `drive.google.com` / `docs.google.com`.
+> Prefer `/connect-chrome` + manual login for those accounts.
 
 ## License
 
