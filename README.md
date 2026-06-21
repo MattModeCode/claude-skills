@@ -13,6 +13,7 @@ more can be dropped in alongside it over time.
 | Skill | Description |
 |---|---|
 | [`gdrive-bulk-download`](./skills/gdrive-bulk-download) | Bulk-download Google Docs, Slides, and Drive-hosted PDF/DOCX/PPTX files from a list of links, including on restricted/managed Workspace accounts. |
+| [`mashuai-brand`](./skills/mashuai-brand) | The MashuAI brand system — colour, typography, components, and voice rules to apply whenever building or styling anything visual under the MashuAI umbrella. |
 
 ## What it does
 
