@@ -1,117 +1,45 @@
 # claude-skills
 
-> Claude Code skills, published. Starts with one that bulk-downloads a pile
-> of Google Drive links — even on restricted or managed Google Workspace
-> accounts that can't install a Drive connector or browser extension.
+> A growing library of my published [Claude Code](https://claude.com/claude-code) skills —
+> drop one into `~/.claude/skills/` and go.
 
-This repo is where I publish my [Claude Code](https://claude.com/claude-code)
-skills. It starts with one — `gdrive-bulk-download` — and is structured so
-more can be dropped in alongside it over time.
+This repo is where I publish the Claude Code skills I build. A [skill](https://claude.com/claude-code)
+is a folder with a `SKILL.md` that teaches Claude Code a repeatable capability; Claude loads
+it automatically when a task matches its description. Each skill here is self-contained and
+documented on its own page — the table below is the index, and it grows over time as I add more.
 
 ## Skills Library
 
-| Skill | Description |
-|---|---|
-| [`gdrive-bulk-download`](./skills/gdrive-bulk-download) | Bulk-download Google Docs, Slides, and Drive-hosted PDF/DOCX/PPTX files from a list of links, including on restricted/managed Workspace accounts. |
-| [`mashuai-brand`](./skills/mashuai-brand) | The MashuAI brand system — colour, typography, components, and voice rules to apply whenever building or styling anything visual under the MashuAI umbrella. |
-
-## What it does
-
-Give Claude a pile of Google Drive links (pasted in the prompt, or in a `.txt`
-file, one URL per line) and it will download them all to a single timestamped
-folder:
-
-- **Google Docs** → exported to PDF
-- **Google Slides** → exported to PDF
-- **Drive files** already stored as PDF / DOCX / PPTX → downloaded as-is
-- **Google Sheets** → reported as unsupported (not downloaded)
-
-It writes a `manifest.json` next to the files tracking every input URL and its
-status (`ok` / `unsupported` / `error`), and reports a summary at the end. A
-single failure never aborts the batch.
-
-Because it drives a real headless browser session, it works with **restricted or
-managed Google Workspace accounts** that can't install Claude's Drive connector,
-a Drive MCP, or browser extensions.
-
-## Requirements
-
-- **[Claude Code](https://claude.com/claude-code)**
-- **[gstack](https://github.com/getgrit/gstack)** — `gdrive-bulk-download` is
-  **not functional without it**. It uses gstack's headless `browse` binary
-  (referenced as `$B`, expected at `~/.claude/skills/gstack/browse/dist/browse`)
-  for all navigation and downloads.
-- A Google account with access to the files, logged in within the browse session
-  (see [Authentication](#authentication)).
+| Skill | What it does | Docs |
+|---|---|---|
+| [`gdrive-bulk-download`](./skills/gdrive-bulk-download) | Bulk-download Google Docs, Slides, and Drive-hosted PDF/DOCX/PPTX files from a list of links — including on restricted/managed Workspace accounts that can't install a Drive connector or extension. | [README](./skills/gdrive-bulk-download/README.md) |
+| [`mashuai-brand`](./skills/mashuai-brand) | The MashuAI brand system — colour, typography, components, and voice rules applied whenever Claude builds or styles anything visual under the MashuAI umbrella. | [README](./skills/mashuai-brand/README.md) |
 
 ## Installation
 
-Clone this repo and copy (or symlink) the skill you want into your Claude Code
-skills directory:
+Each skill is a folder under [`skills/`](./skills). Clone the repo and copy the one you want
+into your Claude Code skills directory:
 
 ```bash
 git clone https://github.com/MattModeCode/claude-skills.git
 cp -r claude-skills/skills/gdrive-bulk-download ~/.claude/skills/
 ```
 
-Or symlink it so you can `git pull` updates in place:
+Or symlink it so `git pull` updates the skill in place:
 
 ```bash
 ln -s "$(pwd)/claude-skills/skills/gdrive-bulk-download" \
   ~/.claude/skills/gdrive-bulk-download
 ```
 
-Restart Claude Code (or start a new session) and the skill will be available.
+Restart Claude Code (or start a new session) and the skill becomes available. It triggers
+automatically when your request matches it — you don't need to name it.
 
-## Usage
+## Requirements
 
-Just ask Claude to download some links. It triggers automatically when you paste
-Drive URLs or point at a file of them.
+- **[Claude Code](https://claude.com/claude-code)** for every skill.
+- Some skills have their own dependencies — for example, `gdrive-bulk-download` is **not
+  functional without [gstack](https://github.com/getgrit/gstack)**, whose headless `browse`
+  binary it uses for navigation and downloads.
 
-**Paste links directly:**
-
-```
-Download these to ~/Downloads:
-https://docs.google.com/document/d/FILE_ID/edit
-https://docs.google.com/presentation/d/FILE_ID/edit
-https://drive.google.com/file/d/FILE_ID/view
-```
-
-**Point at a file of links** (one URL per line; blank lines and `#` comments
-ignored):
-
-```
-Bulk download every link in ~/links.txt into ~/Downloads/clients
-```
-
-Output lands in `<output-dir>/<DD-MM-YYYY_HH-MM>/` (defaults to `~/Downloads`),
-with all files plus a `manifest.json` for the run.
-
-## Supported / unsupported types
-
-| Input URL | Resolved type | Output |
-|---|---|---|
-| `docs.google.com/document/d/{ID}` | Google Doc | PDF |
-| `docs.google.com/presentation/d/{ID}` | Google Slides | PDF |
-| `drive.google.com/file/d/{ID}` (or `open?id={ID}`) | Drive file | original `.pdf` / `.docx` / `.pptx` |
-| Direct `.pdf` / `.docx` / `.pptx` URL | Direct file | as-is |
-| `docs.google.com/spreadsheets/d/{ID}` | Google Sheet | **unsupported** — skipped |
-| Anything else | — | **unsupported** — skipped |
-
-## Authentication
-
-The skill checks for a logged-in Google session before downloading. If you're
-not authenticated:
-
-- It will use gstack's `/connect-chrome` + a manual `handoff` so you can complete
-  login/MFA yourself, then resume.
-
-> [!WARNING]
-> Cookie import (`/setup-browser-cookies`) is unreliable for restricted/managed
-> accounts. Google auth cookies often get scoped to a country-TLD domain (e.g.
-> `.google.ca`) that doesn't carry over to `drive.google.com` / `docs.google.com`.
-> Prefer `/connect-chrome` + manual login for those accounts.
-
-## License
-
-[MIT](./LICENSE)
+See each skill's README for its exact requirements, usage, and setup.
