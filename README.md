@@ -18,18 +18,17 @@ documented on its own page — the table below is the index, and it grows over t
 ## Installation
 
 Each skill is a folder under [`skills/`](./skills). Clone the repo and copy the one you want
-into your Claude Code skills directory:
+into your Claude Code skills directory, replacing `<skill>` with its folder name:
 
 ```bash
 git clone https://github.com/MattModeCode/claude-skills.git
-cp -r claude-skills/skills/gdrive-bulk-download ~/.claude/skills/
+cp -r claude-skills/skills/<skill> ~/.claude/skills/
 ```
 
 Or symlink it so `git pull` updates the skill in place:
 
 ```bash
-ln -s "$(pwd)/claude-skills/skills/gdrive-bulk-download" \
-  ~/.claude/skills/gdrive-bulk-download
+ln -s "$(pwd)/claude-skills/skills/<skill>" ~/.claude/skills/<skill>
 ```
 
 Restart Claude Code (or start a new session) and the skill becomes available. It triggers
@@ -38,8 +37,5 @@ automatically when your request matches it — you don't need to name it.
 ## Requirements
 
 - **[Claude Code](https://claude.com/claude-code)** for every skill.
-- Some skills have their own dependencies — for example, `gdrive-bulk-download` is **not
-  functional without [gstack](https://github.com/getgrit/gstack)**, whose headless `browse`
-  binary it uses for navigation and downloads.
-
-See each skill's README for its exact requirements, usage, and setup.
+- Individual skills may have their own dependencies and setup. See each skill's README
+  (linked in the table above) for its exact requirements, usage, and configuration.
