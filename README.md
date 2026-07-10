@@ -12,6 +12,7 @@ documented on its own page — the table below is the index, and it grows over t
 
 | Skill | What it does | Docs |
 |---|---|---|
+| [`create-visual-readme`](./skills/create-visual-readme) | Rebuilds a project's README as a visual landing page — drives the real app to capture genuine screenshots and a short GIF, then writes a lean README around them (falls back to a plain text README for non-visual projects). | [README](./skills/create-visual-readme/README.md) |
 | [`gdrive-bulk-download`](./skills/gdrive-bulk-download) | Bulk-download Google Docs, Slides, and Drive-hosted PDF/DOCX/PPTX files from a list of links — including on restricted/managed Workspace accounts that can't install a Drive connector or extension. | [README](./skills/gdrive-bulk-download/README.md) |
 | [`mashuai-brand`](./skills/mashuai-brand) | The MashuAI brand system — colour, typography, components, and voice rules applied whenever Claude builds or styles anything visual under the MashuAI umbrella. | [README](./skills/mashuai-brand/README.md) |
 
